@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Router</title>
+  </head>
+  <body>
+    <nav id="nav"></nav>
+
+    <div id="view">Ładowanie...</div>
+
+    <script>
+      const routes = [
+        { name: "Home", path: "html/dashboard.html" },
+        { name: "About", path: "html/about.html" },
+      ];
+
+      // const nav = document.getElementById("nav");
+      // routes.forEach((route) => {
+      //   const btn = document.createElement("button");
+      //   btn.textContent = route.name;
+      //   btn.onclick = () => navigate(route.path);
+      //   nav.appendChild(btn);
+      // });
+
+      function navigate(route) {
+        if (!routes.some((r) => r.path === route)) {
+          document.getElementById(
+            "view"
+          ).innerHTML = `<p>Route ugotowany: 404</p>`;
+          return;
+        }
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", route, true);
+        xhr.onload = function () {
+          if (xhr.status === 200 || xhr.status === 0) {
+            document.getElementById("view").innerHTML = xhr.responseText;
+            window.location.hash = route;
+          } else {
+            document.getElementById("view").innerHTML =
+              "<p>Route ugotowany: " + xhr.status + "</p>";
+          }
+        };
+        xhr.onerror = () => {
+          document.getElementById("view").innerHTML =
+            "<p>Route ugotowany: błąd sieci</p>";
+        };
+        xhr.send();
+      }
+
+      window.addEventListener("load", () => {
+        const start = window.location.hash.replace("#", "") || routes[0].path;
+        navigate(start);
+      });
+
+      window.addEventListener("hashchange", () => {
+        navigate(window.location.hash.replace("#", ""));
+      });
+    </script>
+  </body>
+</html>
