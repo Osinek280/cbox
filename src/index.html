@@ -1,62 +1,772 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Router</title>
-  </head>
-  <body>
-    <nav id="nav"></nav>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logowanie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
 
-    <div id="view">Ładowanie...</div>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: none;
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: rgb(228, 228, 231);
+        border-radius: 10px;
+      }
+
+      @media (max-width: 768px) {
+        ::-webkit-scrollbar {
+          width: 5px;
+        }
+      }
+
+      @layer base {
+        :root {
+          --background: 0 0% 100%;
+          --foreground: 240 10% 3.9%;
+          --card: 0 0% 100%;
+          --card-foreground: 240 10% 3.9%;
+          --popover: 0 0% 100%;
+          --popover-foreground: 240 10% 3.9%;
+          --primary: 240 5.9% 10%;
+          --primary-foreground: 0 0% 98%;
+          --secondary: 240 4.8% 95.9%;
+          --secondary-foreground: 240 5.9% 10%;
+          --muted: 240 4.8% 95.9%;
+          --muted-foreground: 240 3.8% 46.1%;
+          --accent: 240 4.8% 95.9%;
+          --accent-foreground: 240 5.9% 10%;
+          --destructive: 0 84.2% 60.2%;
+          --destructive-foreground: 0 0% 98%;
+          --border: 240 5.9% 90%;
+          --input: 240 5.9% 90%;
+          --ring: 240 10% 3.9%;
+          --chart-1: 12 76% 61%;
+          --chart-2: 173 58% 39%;
+          --chart-3: 197 37% 24%;
+          --chart-4: 43 74% 66%;
+          --chart-5: 27 87% 67%;
+          --radius: 0.5rem;
+        }
+
+        .dark {
+          --background: 240 10% 3.9%;
+          --foreground: 0 0% 98%;
+          --card: 240 10% 3.9%;
+          --card-foreground: 0 0% 98%;
+          --popover: 240 10% 3.9%;
+          --popover-foreground: 0 0% 98%;
+          --primary: 0 0% 98%;
+          --primary-foreground: 240 5.9% 10%;
+          --secondary: 240 3.7% 15.9%;
+          --secondary-foreground: 0 0% 98%;
+          --muted: 240 3.7% 15.9%;
+          --muted-foreground: 240 5% 64.9%;
+          --accent: 240 3.7% 15.9%;
+          --accent-foreground: 0 0% 98%;
+          --destructive: 0 62.8% 30.6%;
+          --destructive-foreground: 0 0% 98%;
+          --border: 240 3.7% 15.9%;
+          --input: 240 3.7% 15.9%;
+          --ring: 240 4.9% 83.9%;
+          --chart-1: 220 70% 50%;
+          --chart-2: 160 60% 45%;
+          --chart-3: 30 80% 55%;
+          --chart-4: 280 65% 60%;
+          --chart-5: 340 75% 55%;
+        }
+      }
+
+      @layer base {
+        * {
+          @apply border-border;
+        }
+
+        body {
+          @apply bg-background text-foreground;
+        }
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .fade-in {
+        animation: fadeIn 0.3s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .btn-primary {
+        @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+      }
+
+      .btn-secondary {
+        @apply bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+      }
+
+      .input-field {
+        @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200;
+      }
+
+      .card {
+        @apply bg-white rounded-xl shadow-lg border border-gray-200;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center space-x-2">
+            <div
+              class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center"
+            >
+              <span class="text-white font-bold text-sm">AR</span>
+            </div>
+            <span class="font-semibold text-gray-900">Architectures</span>
+          </div>
+
+          <div id="userMenu" class="hidden flex items-center space-x-4">
+            <span id="userEmail" class="text-sm text-gray-600"></span>
+            <button id="logoutBtn" class="btn-secondary text-sm">
+              Wyloguj
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <!-- Login Section -->
+      <section id="loginSection" class="max-w-md mx-auto">
+        <div class="card p-8 fade-in">
+          <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Logowanie</h1>
+            <p class="text-gray-600 mt-2">
+              Wprowadź swoje dane aby się zalogować
+            </p>
+          </div>
+
+          <form id="loginForm" class="space-y-6">
+            <div>
+              <label
+                for="loginEmail"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="loginEmail"
+                class="input-field"
+                placeholder="your@example.com"
+                required
+              />
+            </div>
+
+            <div>
+              <label
+                for="loginPassword"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                >Hasło</label
+              >
+              <input
+                type="password"
+                id="loginPassword"
+                class="input-field"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+
+            <button type="submit" class="w-full btn-primary">
+              <span id="loginBtnText">Zaloguj się</span>
+              <span id="loginLoader" class="hidden">Logowanie...</span>
+            </button>
+          </form>
+
+          <div class="mt-6 text-center">
+            <p class="text-sm text-gray-600">
+              Nie masz konta?
+              <button
+                id="showRegisterBtn"
+                class="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                Zarejestruj się
+              </button>
+            </p>
+          </div>
+
+          <div
+            id="loginError"
+            class="hidden mt-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm"
+          ></div>
+        </div>
+      </section>
+
+      <!-- Register Section -->
+      <section id="registerSection" class="hidden max-w-md mx-auto">
+        <div class="card p-8 fade-in">
+          <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Rejestracja</h1>
+            <p class="text-gray-600 mt-2">Utwórz nowe konto</p>
+          </div>
+
+          <form id="registerForm" class="space-y-6">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="firstName"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  >Imię</label
+                >
+                <input
+                  type="text"
+                  id="firstName"
+                  class="input-field"
+                  placeholder="Jan"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  for="lastName"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  >Nazwisko</label
+                >
+                <input
+                  type="text"
+                  id="lastName"
+                  class="input-field"
+                  placeholder="Kowalski"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                for="registerEmail"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="registerEmail"
+                class="input-field"
+                placeholder="your@example.com"
+                required
+              />
+            </div>
+
+            <div>
+              <label
+                for="registerPassword"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                >Hasło</label
+              >
+              <input
+                type="password"
+                id="registerPassword"
+                class="input-field"
+                placeholder="••••••••"
+                required
+                minlength="6"
+              />
+            </div>
+
+            <button type="submit" class="w-full btn-primary">
+              <span id="registerBtnText">Zarejestruj się</span>
+              <span id="registerLoader" class="hidden">Rejestracja...</span>
+            </button>
+          </form>
+
+          <div class="mt-6 text-center">
+            <p class="text-sm text-gray-600">
+              Masz już konto?
+              <button
+                id="showLoginBtn"
+                class="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                Zaloguj się
+              </button>
+            </p>
+          </div>
+
+          <div
+            id="registerError"
+            class="hidden mt-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm"
+          ></div>
+          <div
+            id="registerSuccess"
+            class="hidden mt-4 p-3 bg-green-50 border border-green-200 rounded-lg text-green-600 text-sm"
+          ></div>
+        </div>
+      </section>
+
+      <!-- Objects List Section -->
+      <section id="objectsSection" class="hidden">
+        <div class="fade-in">
+          <div class="flex justify-between items-center mb-8">
+            <div>
+              <h1 class="text-3xl font-bold text-gray-900">Twoje Obiekty</h1>
+              <p class="text-gray-600 mt-2">
+                Lista dostępnych obiektów architektonicznych
+              </p>
+            </div>
+            <button id="refreshBtn" class="btn-secondary">Odśwież</button>
+          </div>
+
+          <div
+            id="objectsGrid"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          >
+            <!-- Objects will be populated here -->
+          </div>
+
+          <div
+            id="objectsError"
+            class="hidden mt-8 p-4 bg-red-50 border border-red-200 rounded-lg text-red-600"
+          ></div>
+          <div id="objectsLoader" class="hidden text-center py-12">
+            <div
+              class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"
+            ></div>
+            <p class="text-gray-600 mt-4">Ładowanie obiektów...</p>
+          </div>
+        </div>
+      </section>
+    </main>
 
     <script>
-      const routes = [
-        { name: "Home", path: "html/dashboard.html" },
-        { name: "About", path: "html/about.html" },
-      ];
+      // State management
+      let currentUser = null;
+      let objects = [];
 
-      // const nav = document.getElementById("nav");
-      // routes.forEach((route) => {
-      //   const btn = document.createElement("button");
-      //   btn.textContent = route.name;
-      //   btn.onclick = () => navigate(route.path);
-      //   nav.appendChild(btn);
-      // });
+      // API Base URL
+      const API_BASE = "http://localhost:8081/api";
 
-      function navigate(route) {
-        if (!routes.some((r) => r.path === route)) {
-          document.getElementById(
-            "view"
-          ).innerHTML = `<p>Route ugotowany: 404</p>`;
+      // DOM Elements
+      const loginSection = document.getElementById("loginSection");
+      const registerSection = document.getElementById("registerSection");
+      const objectsSection = document.getElementById("objectsSection");
+      const userMenu = document.getElementById("userMenu");
+      const userEmail = document.getElementById("userEmail");
+
+      // Forms
+      const loginForm = document.getElementById("loginForm");
+      const registerForm = document.getElementById("registerForm");
+
+      // Buttons
+      const showRegisterBtn = document.getElementById("showRegisterBtn");
+      const showLoginBtn = document.getElementById("showLoginBtn");
+      const logoutBtn = document.getElementById("logoutBtn");
+      const refreshBtn = document.getElementById("refreshBtn");
+
+      // Error elements
+      const loginError = document.getElementById("loginError");
+      const registerError = document.getElementById("registerError");
+      const registerSuccess = document.getElementById("registerSuccess");
+      const objectsError = document.getElementById("objectsError");
+
+      // Utility functions
+      function showElement(element) {
+        element.classList.remove("hidden");
+        element.classList.add("fade-in");
+      }
+
+      function hideElement(element) {
+        element.classList.add("hidden");
+        element.classList.remove("fade-in");
+      }
+
+      function showError(element, message) {
+        element.textContent = message;
+        showElement(element);
+        setTimeout(() => hideElement(element), 5000);
+      }
+
+      function showSuccess(element, message) {
+        element.textContent = message;
+        showElement(element);
+        setTimeout(() => hideElement(element), 3000);
+      }
+
+      // Token management using localStorage
+      function saveTokens(token, refreshToken) {
+        localStorage.setItem("token", token);
+        localStorage.setItem("refreshToken", refreshToken);
+      }
+
+      function getTokens() {
+        return {
+          token: localStorage.getItem("token"),
+          refreshToken: localStorage.getItem("refreshToken"),
+        };
+      }
+
+      function clearTokens() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("refreshToken");
+      }
+
+      // API functions
+      async function apiCall(endpoint, options = {}) {
+        console.log("cipa");
+        const { token } = getTokens();
+
+        const config = {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token && { Authorization: `Bearer ${token}` }),
+          },
+          ...options,
+        };
+
+        try {
+          const response = await fetch(`${API_BASE}${endpoint}`, config);
+
+          // If token expired, try to refresh
+          if (response.status === 401 && token) {
+            const refreshed = await refreshToken();
+            if (refreshed) {
+              // Retry the original request with new token
+              config.headers.Authorization = `Bearer ${getTokens().token}`;
+              return await fetch(`${API_BASE}${endpoint}`, config);
+            } else {
+              logout();
+              return null;
+            }
+          }
+
+          return response;
+        } catch (error) {
+          console.error("API call failed:", error);
+          throw error;
+        }
+      }
+
+      async function register(userData) {
+        const response = await apiCall("/auth/register", {
+          method: "POST",
+          body: JSON.stringify(userData),
+        });
+
+        if (!response.ok) {
+          const error = await response.text();
+          throw new Error(error || "Błąd rejestracji");
+        }
+
+        return await response.json();
+      }
+
+      async function login(email, password) {
+        const response = await apiCall("/auth/login", {
+          method: "POST",
+          body: JSON.stringify({ email, password }),
+        });
+
+        if (!response.ok) {
+          const error = await response.text();
+          throw new Error(error || "Błąd logowania");
+        }
+
+        return await response.json();
+      }
+
+      async function refreshToken() {
+        const { refreshToken: refresh } = getTokens();
+        if (!refresh) return false;
+
+        try {
+          const response = await apiCall("/auth/refresh", {
+            method: "POST",
+            body: JSON.stringify({ refreshToken: refresh }),
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            saveTokens(data.token, data.refreshToken);
+            return true;
+          }
+        } catch (error) {
+          console.error("Token refresh failed:", error);
+        }
+
+        return false;
+      }
+
+      async function logout() {
+        const { refreshToken: refresh } = getTokens();
+
+        if (refresh) {
+          try {
+            await apiCall("/auth/logout", {
+              method: "POST",
+              body: JSON.stringify({ refreshToken: refresh }),
+            });
+          } catch (error) {
+            console.error("Logout API call failed:", error);
+          }
+        }
+
+        clearTokens();
+        currentUser = null;
+        showAuthScreen();
+      }
+
+      // Demo function to simulate fetching objects
+      async function fetchObjects() {
+        // Simulate API call delay
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        // Return demo data
+        return [
+          {
+            id: 1,
+            name: "Thermal Redwood",
+            category: "Wood",
+            image:
+              "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=200&fit=crop",
+            description: "Thermally modified redwood for exterior cladding",
+          },
+          {
+            id: 2,
+            name: "Spatulata Taj Mahal",
+            category: "Stone",
+            image:
+              "https://images.unsplash.com/photo-1600375739300-1f04fb2b6b3e?w=300&h=200&fit=crop",
+            description: "Premium marble with elegant patterns",
+          },
+          {
+            id: 3,
+            name: "Bembridge Antique Brick",
+            category: "Brick",
+            image:
+              "https://images.unsplash.com/photo-1604523419-7b857c8b0d9c?w=300&h=200&fit=crop",
+            description: "Staggered antique brick pattern",
+          },
+          {
+            id: 4,
+            name: "Athena Hanex",
+            category: "Composite",
+            image:
+              "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=300&h=200&fit=crop",
+            description: "Modern composite surface material",
+          },
+          {
+            id: 5,
+            name: "Bamboo Flooring",
+            category: "Wood",
+            image:
+              "https://images.unsplash.com/photo-1586191358346-7cab2b8b3dd6?w=300&h=200&fit=crop",
+            description: "Sustainable bamboo flooring solution",
+          },
+          {
+            id: 6,
+            name: "Royal White Granite",
+            category: "Stone",
+            image:
+              "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=300&h=200&fit=crop",
+            description: "Flamed royal white granite finish",
+          },
+        ];
+      }
+
+      // UI Functions
+      function showAuthScreen() {
+        hideElement(objectsSection);
+        hideElement(userMenu);
+        showElement(loginSection);
+        hideElement(registerSection);
+      }
+
+      function showObjectsScreen() {
+        hideElement(loginSection);
+        hideElement(registerSection);
+        showElement(objectsSection);
+        showElement(userMenu);
+
+        if (currentUser) {
+          userEmail.textContent = currentUser.email;
+        }
+
+        loadObjects();
+      }
+
+      function renderObjects(objectsList) {
+        const grid = document.getElementById("objectsGrid");
+
+        if (objectsList.length === 0) {
+          grid.innerHTML = `
+            <div class="col-span-full text-center py-12">
+              <p class="text-gray-500">Brak dostępnych obiektów</p>
+            </div>
+          `;
           return;
         }
 
-        const xhr = new XMLHttpRequest();
-        xhr.open("GET", route, true);
-        xhr.onload = function () {
-          if (xhr.status === 200 || xhr.status === 0) {
-            document.getElementById("view").innerHTML = xhr.responseText;
-            window.location.hash = route;
-          } else {
-            document.getElementById("view").innerHTML =
-              "<p>Route ugotowany: " + xhr.status + "</p>";
-          }
-        };
-        xhr.onerror = () => {
-          document.getElementById("view").innerHTML =
-            "<p>Route ugotowany: błąd sieci</p>";
-        };
-        xhr.send();
+        grid.innerHTML = objectsList
+          .map(
+            (obj) => `
+          <div class="card p-6 hover:shadow-xl transition-shadow duration-300">
+            <div class="aspect-video bg-gray-100 rounded-lg mb-4 overflow-hidden">
+              <img src="${obj.image}" alt="${obj.name}" class="w-full h-full object-cover">
+            </div>
+            <h3 class="font-semibold text-gray-900 mb-2">${obj.name}</h3>
+            <p class="text-sm text-gray-600 mb-2">${obj.category}</p>
+            <p class="text-sm text-gray-500">${obj.description}</p>
+          </div>
+        `
+          )
+          .join("");
       }
 
-      window.addEventListener("load", () => {
-        const start = window.location.hash.replace("#", "") || routes[0].path;
-        navigate(start);
+      async function loadObjects() {
+        const loader = document.getElementById("objectsLoader");
+        const grid = document.getElementById("objectsGrid");
+
+        showElement(loader);
+        hideElement(objectsError);
+        grid.innerHTML = "";
+
+        try {
+          objects = await fetchObjects();
+          renderObjects(objects);
+        } catch (error) {
+          showError(
+            objectsError,
+            "Błąd podczas ładowania obiektów: " + error.message
+          );
+        } finally {
+          hideElement(loader);
+        }
+      }
+
+      // Event Listeners
+      loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const submitBtn = document.getElementById("loginBtnText");
+        const loader = document.getElementById("loginLoader");
+
+        const email = document.getElementById("loginEmail").value;
+        const password = document.getElementById("loginPassword").value;
+
+        hideElement(submitBtn);
+        showElement(loader);
+        hideElement(loginError);
+
+        try {
+          const response = await login(email, password);
+
+          saveTokens(response.token, response.refreshToken);
+          currentUser = { email };
+          showObjectsScreen();
+        } catch (error) {
+          showError(loginError, error.message);
+        } finally {
+          hideElement(loader);
+          showElement(submitBtn);
+        }
       });
 
-      window.addEventListener("hashchange", () => {
-        navigate(window.location.hash.replace("#", ""));
+      registerForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const submitBtn = document.getElementById("registerBtnText");
+        const loader = document.getElementById("registerLoader");
+
+        const userData = {
+          firstname: document.getElementById("firstName").value,
+          lastname: document.getElementById("lastName").value,
+          email: document.getElementById("registerEmail").value,
+          password: document.getElementById("registerPassword").value,
+        };
+
+        hideElement(submitBtn);
+        showElement(loader);
+        hideElement(registerError);
+        hideElement(registerSuccess);
+
+        try {
+          await register(userData);
+
+          showSuccess(
+            registerSuccess,
+            "Rejestracja zakończona pomyślnie! Możesz się teraz zalogować."
+          );
+          registerForm.reset();
+
+          // Switch to login after 2 seconds
+          setTimeout(() => {
+            hideElement(registerSection);
+            showElement(loginSection);
+          }, 2000);
+        } catch (error) {
+          showError(registerError, error.message);
+        } finally {
+          hideElement(loader);
+          showElement(submitBtn);
+        }
       });
+
+      showRegisterBtn.addEventListener("click", () => {
+        hideElement(loginSection);
+        showElement(registerSection);
+      });
+
+      showLoginBtn.addEventListener("click", () => {
+        hideElement(registerSection);
+        showElement(loginSection);
+      });
+
+      logoutBtn.addEventListener("click", logout);
+
+      refreshBtn.addEventListener("click", loadObjects);
+
+      // Initialize app
+      function initApp() {
+        const { token } = getTokens();
+
+        if (token) {
+          // For demo purposes, assume token is valid
+          currentUser = { email: "admin@admin.com" };
+          showObjectsScreen();
+        } else {
+          showAuthScreen();
+        }
+      }
+
+      // Start the application
+      initApp();
     </script>
   </body>
 </html>
