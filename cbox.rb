@@ -14,7 +14,7 @@ module Cbox
       }
     )
     
-    html_file = File.join(__dir__, 'src', 'dist', 'index.html')
+    html_file = File.join(__dir__, 'dist', 'index.html')
     
     if File.exist?(html_file)
       dlg.set_file(html_file)
