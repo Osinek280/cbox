@@ -1,0 +1,216 @@
+Komponenty
+├── Architektura
+│   ├── Drzwi
+│   │   ├── Wewnetrzne
+│   │   │   ├── drzwi_01.skp
+│   │   │   └── Elementy
+│   │   │       ├── Klamki
+│   │   │       │   ├── klamka_klassik.skp 
+│   │   │       │   └── klamka_modern.skp      
+│   │   │       └── Zawiasy
+│   │   │           ├── zawias_standard.skp    
+│   │   │           └── zawias_wzmocniony.skp   
+│   │   └── Zewnetrzne
+│   │       └── Elementy
+│   │           ├── Klamki
+│   │           │   ├── klamka_zewnetrzna_01.skp  
+│   │           │   └── klamka_zewnetrzna_02.skp
+│   │           ├── Zawiasy
+│   │           │   └── zawias_zewnetrzny.skp
+│   │           └── Wizjery
+│   │               ├── wizjer_standard.skp
+│   │               └── wizjer_szerokokątny.skp
+│   ├── Okna
+│   │   ├── Drewniane
+│   │   │   └── Elementy
+│   │   │       ├── Klameczki
+│   │   │       │   ├── klam_wood_01.skp
+│   │   │       │   └── klam_wood_02.skp
+│   │   │       └── Pakiety_Szybowe
+│   │   │           ├── pakiet_3_szyby.skp
+│   │   │           └── pakiet_5_szyb.skp
+│   │   ├── Aluminiowe
+│   │   │   └── Elementy
+│   │   │       ├── klam_alum_01.skp
+│   │   │       └── pakiet_alum_2_szyby.skp
+│   │   └── PCV
+│   │       └── Elementy
+│   │           ├── klam_pcv_01.skp
+│   │           └── pakiet_pcv_3_szyby.skp
+│   ├── Bramy
+│   │   ├── Skrzydlowe
+│   │   │   ├── brama_skrzydlowa_01.skp
+│   │   │   └── brama_skrzydlowa_02.skp
+│   │   └── Przesuwne
+│   │       ├── brama_przesuwna_01.skp
+│   │       └── brama_przesuwna_02.skp
+│   ├── Sciany
+│   │   ├── sciana_wewnetrzna_01.skp
+│   │   └── sciana_zewnetrzna_01.skp
+│   ├── Dachy
+│   │   ├── dach_placowy.skp
+│   │   └── dach_dwuspadowy.skp
+│   ├── Slupy_i_Belki
+│   │   ├── slup_drewniany.skp
+│   │   └── belka_stalowa.skp
+│   └── Otoczenie
+│       ├── Ogrodzenia
+│       │   ├── plot_klasyczny.skp
+│       │   └── plot_nowoczesny.skp
+│       └── Chodniki
+│           ├── chodnik_betonowy.skp
+│           └── chodnik_kostka.skp
+├── Wnetrza_Stale
+│   ├── Kuchnie
+│   │   ├── Szafki
+│   │   │   └── Elementy
+│   │   │       ├── Fronty
+│   │   │       │   ├── front_bialy_mat.skp
+│   │   │       │   └── front_drewniany.skp
+│   │   │       ├── Uchwyty
+│   │   │       │   ├── uchwyt_metalowy.skp
+│   │   │       │   └── uchwyt_plastikowy.skp
+│   │   │       └── Nogi
+│   │   │           ├── noga_stalowa.skp
+│   │   │           └── noga_drewniana.skp
+│   │   ├── Blaty
+│   │   │   ├── blat_granitowy.skp
+│   │   │   └── blat_laminatowy.skp
+│   │   ├── AGD
+│   │   │   ├── zmywarka.skp
+│   │   │   └── kuchenka.skp
+│   │   └── Akcesoria
+│   │       ├── pojemnik_na_przyprawy.skp
+│   │       └── deska_do_krojenia.skp
+│   ├── Lazienki
+│   │   ├── Szafki
+│   │   │   └── Elementy
+│   │   │       ├── front_lazienkowy_01.skp
+│   │   │       ├── uchwyt_lazienkowy.skp
+│   │   │       └── noga_lazienkowa.skp
+│   │   ├── Umywalki
+│   │   │   ├── umywalka_okrągła.skp
+│   │   │   └── umywalka_kwadratowa.skp
+│   │   ├── Wanny
+│   │   │   ├── wanna_klassik.skp
+│   │   │   └── wanna_nowoczesna.skp
+│   │   ├── Przysznice
+│   │   │   ├── prysznic_zabudowa.skp
+│   │   │   └── prysznic_otwarty.skp
+│   │   ├── AGD
+│   │   │   ├── podgrzewacz_wody.skp
+│   │   │   └── wentylator_lazienkowy.skp
+│   │   └── Akcesoria
+│   │       ├── mydelniczka.skp
+│   │       └── wieszak_na_reczniki.skp
+│   ├── Szafy_Garderoby
+│   │   ├── szafa_2drzwiowa.skp
+│   │   └── szafa_3drzwiowa.skp
+│   ├── Spiżarnia
+│   │   └── regał_spizarnia_01.skp
+│   ├── Piwnica
+│   │   └── regał_piwnica_01.skp
+│   └── Magazynek
+│       └── regał_magazynek_01.skp
+├── Wnetrza_Meble
+│   ├── Salony
+│   │   ├── sofa_klasyczna.skp
+│   │   └── fotel_nowoczesny.skp
+│   ├── Jadalnie
+│   │   ├── stół_drewniany.skp
+│   │   └── krzesło_salonowe.skp
+│   ├── Sypialnie
+│   │   ├── łóżko_160x200.skp
+│   │   └── szafka_nocna.skp
+│   └── Biuro
+│       ├── biurko_skręcane.skp
+│       └── krzesło_biurowe.skp
+├── Ogrod
+│   ├── Meble_Ogrodowe
+│   │   ├── leżak_ogrodowy.skp
+│   │   └── stół_ogrodowy.skp
+│   ├── Rosliny
+│   │   ├── Drzewa
+│   │   │   ├── sosna.skp
+│   │   │   └── dąb.skp
+│   │   ├── Krzewy
+│   │   │   ├── jałowiec.skp
+│   │   │   └── berberys.skp
+│   │   ├── Trawy
+│   │   │   ├── trawa_ozdobna.skp
+│   │   │   └── trawa_zieleń.skp
+│   │   └── Doniczkowe
+│   │       ├── paproć.skp
+│   │       └── storczyk.skp
+│   ├── Donice
+│   │   ├── donica_gliniana.skp
+│   │   └── donica_plastikowa.skp
+│   └── Mala_Architektura
+│       ├── Altany
+│       │   ├── altana_drewniana.skp
+│       │   └── altana_metalowa.skp
+│       └── Pergole
+│           ├── pergola_klasyczna.skp
+│           └── pergola_nowoczesna.skp
+├── Dekoracje
+│   ├── Tekstylia
+│   │   ├── zasłona_klasyczna.skp
+│   │   └── zasłona_nowoczesna.skp
+│   ├── Dekoracje_Scienne
+│   │   ├── obraz_klasyczny.skp
+│   │   └── obraz_abstract.skp
+│   └── Drobne_Dekoracje
+│       ├── wazony.skp
+│       └── świeczniki.skp
+├── Techniczne
+│   ├── Komponenty_Dynamiczne
+│   │   ├── drzwi_dynamiczne.skp
+│   │   └── okno_dynamiczne.skp
+│   ├── Moduly_Montazowe
+│   │   ├── uchwyt_montazowy.skp
+│   │   └── szyna_montazowa.skp
+│   └── Szablony_Przestrzenne
+│       ├── szablon_podloga.skp
+│       └── szablon_sufit.skp
+├── Materialy
+│   ├── Drewniane
+│   │   ├── dąb_mat.skp
+│   │   └── sosna_nat.skp
+│   ├── Metalowe
+│   │   ├── stal_szczotkowana.skp
+│   │   └── aluminium_pol.skp
+│   ├── Kamienne
+│   │   ├── granit_czarny.skp
+│   │   └── marmur_biały.skp
+│   ├── Lakierowane
+│   │   ├── lakier_biały.skp
+│   │   └── lakier_czarny.skp
+│   └── Szklane
+│       ├── szkło_matowe.skp
+│       └── szkło_przezroczyste.skp
+├── AGD_RTV
+│   ├── AGD
+│   │   ├── lodowka.skp
+│   │   └── piekarnik.skp
+│   └── RTV
+│       ├── telewizor.skp
+│       └── kino_domowe.skp
+└── Miniatury
+    ├── Architektura
+    │   ├── mini_drzwi_01.skp
+    │   └── mini_okno_01.skp
+    ├── Wnetrza
+    │   ├── mini_szafka_01.skp
+    │   └── mini_kanapa_01.skp
+    ├── Ogrod
+    │   ├── mini_drzewo_01.skp
+    │   └── mini_donica_01.skp
+    ├── Dekoracje
+    │   ├── mini_wazon_01.skp
+    │   └── mini_obraz_01.skp
+    ├── Techniczne
+    │   ├── mini_modul_01.skp
+    │   └── mini_szablon_01.skp
+    └── Elementy
+        ├── mini_klamka_01.skp
+        └── mini_zawias_01.skp
