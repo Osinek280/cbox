@@ -5,16 +5,12 @@ import { loginAPI } from "../api/auth";
 
 export default function LoginForm() {
   const navigate = useNavigate();
-  const { login, isLoggedIn } = useAuth();
+  const { login } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-
-  if (isLoggedIn) {
-    navigate("/", { replace: true });
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
