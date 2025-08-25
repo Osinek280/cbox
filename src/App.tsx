@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/Login";
 import ProtectedRoute from "./context/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
+import FilesPage from "./pages/Dashboard";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
           path="/"
           element={
             <ProtectedRoute>
-              <h1>Siema ziomek, jesteś zalogowany (context działa)</h1>
+              <FilesPage />
             </ProtectedRoute>
           }
         />
