@@ -16,13 +16,6 @@ interface FileNode {
   children: FileNode[];
 }
 
-// interface Window {
-//   sketchup: {
-//     import_file: (url: string) => void;
-//     // tu możesz dopisać inne funkcje SketchUp, jeśli potrzebujesz
-//   };
-// }
-
 interface TreeNodeProps {
   node: FileNode;
   level: number;
@@ -209,9 +202,11 @@ export default function FilesPage() {
                         size="sm"
                         className="w-full mt-2 bg-transparent"
                         onClick={() => {
-                          (window as any).sketchup.import_file(
-                            file.downloadUrl!
-                          );
+                          if (window.sketchup) {
+                            window.sketchup.import_file(file.downloadUrl!);
+                          } else {
+                            console.error("SketchUp plugin is not available.");
+                          }
                         }}
                       >
                         Pobierz
