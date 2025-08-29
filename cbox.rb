@@ -66,7 +66,7 @@ module Cbox
             status = Sketchup.active_model.import(file_path)
             puts "[DEBUG] Wynik importu: #{status.inspect}"
             if status
-              UI.messagebox("Plik zaimportowany: #{file_path}")
+              # UI.messagebox("Plik zaimportowany: #{file_path}")
             else
               UI.messagebox("Import zwrócił false. Format nieobsługiwany?")
             end

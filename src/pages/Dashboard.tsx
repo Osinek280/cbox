@@ -202,11 +202,12 @@ export default function FilesPage() {
                         size="sm"
                         className="w-full mt-2 bg-transparent"
                         onClick={() => {
-                          if (window.sketchup) {
-                            window.sketchup.import_file(file.downloadUrl!);
-                          } else {
-                            console.error("SketchUp plugin is not available.");
-                          }
+                          window.open(file.downloadUrl!, "_blank");
+                          // if (window.sketchup) {
+                          //   window.sketchup.import_file(file.downloadUrl!);
+                          // } else {
+                          //   console.error("SketchUp plugin is not available.");
+                          // }
                         }}
                       >
                         Pobierz
