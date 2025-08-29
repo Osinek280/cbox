@@ -41,8 +41,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       const token = localStorage.getItem("refreshToken");
       if (!token) throw new Error("Brak refresh tokena");
-      const newAccessToken = await refreshTokenAPI(token);
+      const { newAccessToken, newRefreshToken } = await refreshTokenAPI(token);
       localStorage.setItem("accessToken", newAccessToken);
+      localStorage.setItem("refreshToken", newRefreshToken);
       setAccessToken(newAccessToken);
     } catch (err) {
       console.error("Refresh token failed", err);

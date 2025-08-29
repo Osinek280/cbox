@@ -28,7 +28,10 @@ export async function registerAPI(
   if (!res.ok) throw new Error("Register failed");
 }
 
-export async function refreshTokenAPI(refreshToken: string): Promise<string> {
+export async function refreshTokenAPI(refreshToken: string): Promise<{
+  newAccessToken: string;
+  newRefreshToken: string;
+}> {
   const res = await fetch(`${BASE_URL}/refresh`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -36,5 +39,8 @@ export async function refreshTokenAPI(refreshToken: string): Promise<string> {
   });
   if (!res.ok) throw new Error("Refresh token failed");
   const data = await res.json();
-  return data.accessToken;
+  return {
+    newAccessToken: data.token,
+    newRefreshToken: data.refreshToken,
+  };
 }
